@@ -24,5 +24,5 @@ Route::post('login', 'Auth\AuthController@postLogin')->name('login.post');
 Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('users', 'Users/UsersController', ['only' => ['index','show']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 });
