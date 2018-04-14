@@ -18,22 +18,22 @@ class Micropost extends Model
         return $this->belongsToMany(User::class, 'micropost_favorite', 'micropost_id', 'user_id')->withTimestamps();        
     }
     
-    public function add_favorite($userId)
+    public function add_favorite($micropostId)
     {
-        $exist = $this->is_favorite($userId);
+        $exist = $this->is_favorite(\Auth::Id());
         if ($exist) {
             return false;
         } else {
-            $this->users_with_favorite()->attach($userId);
+            $this->users_with_favorite()->attach($micropostId);
             return true;
         }
     }
 
-    public function delete_favorite($userId)
+    public function delete_favorite($micropostId)
     {
-        $exist = $this->is_favorite($userId);
+        $exist = $this->is_favorite(\Auth::Id());
         if ($exist) {
-                        $this->users_with_favorite()->detach($userId);
+            $this->users_with_favorite()->detach($micropostId);
             return true;
         } else {
             return false;
